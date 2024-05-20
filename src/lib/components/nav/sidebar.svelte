@@ -36,7 +36,7 @@
         : '6'}"
 >
     {#if !collapsed}
-        <img src="image/rupert.png" class="w-24" alt="" />
+        <div class="text-2xl font-bold pb-5">Squizzos</div>
     {/if}
 
     <div class="flex flex-col w-full gap-2 text-2xl">
@@ -70,44 +70,30 @@
         </DropdownMenu.Root>
 
         <Separator class="my-2" />
-
         <Button
-            variant={active == "/dashboard" ? "secondary" : "ghost"}
-            href="/dashboard"
+            variant={active == "/tests" ? "secondary" : "ghost"}
+            href="/tests"
             class={collapsed ? "" : "justify-start w-full"}
         >
             <div class="flex items-center gap-2">
-                <Icon icon="heroicons:squares-2x2" class="size-6" />
+                <Icon icon="lucide:list" class="size-6" />
                 {#if !collapsed}
-                    Dashboard
+                    Tests
                 {/if}
             </div>
         </Button>
         <Button
-            variant={active == "/pantry" ? "secondary" : "ghost"}
-            href="/pantry"
+            variant={active == "/leaderboard" ? "secondary" : "ghost"}
+            href="/leaderboard"
             class={collapsed ? "" : "justify-start w-full"}
         >
             <div class="flex items-center gap-2">
-                <Icon icon="solar:fridge-outline" class="size-6" />
+                <Icon icon="material-symbols:trophy-sharp" class="size-6" />
                 {#if !collapsed}
-                    Pantry
+                    Leaderboard
                 {/if}
             </div>
         </Button>
-        <Button
-            variant={active == "/suggestions" ? "secondary" : "ghost"}
-            href="/suggestions"
-            class={collapsed ? "" : "justify-start w-full"}
-        >
-            <div class="flex items-center gap-2">
-                <Icon icon="ep:food" class="size-6" />
-                {#if !collapsed}
-                    Suggestions
-                {/if}
-            </div>
-        </Button>
-
         <Button
             variant={active == "/bookmarks" ? "secondary" : "ghost"}
             href="/bookmarks"
@@ -116,22 +102,11 @@
             <div class="flex items-center gap-2">
                 <Icon icon="lucide:bookmark" class="size-6" />
                 {#if !collapsed}
-                    Saved
+                    Completed
                 {/if}
             </div>
         </Button>
-        <Button
-            variant={active == "/list" ? "secondary" : "ghost"}
-            href="/list"
-            class={collapsed ? "" : "justify-start w-full"}
-        >
-            <div class="flex items-center gap-2">
-                <Icon icon="lucide:list" class="size-6" />
-                {#if !collapsed}
-                    List
-                {/if}
-            </div>
-        </Button>
+
         <Separator class="my-2" />
 
         <Button

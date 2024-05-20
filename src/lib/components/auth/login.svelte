@@ -15,7 +15,7 @@
             .collection("users")
             .authWithOAuth2({ provider: "github" });
 
-         goto("/dashboard");
+         goto("/tests");
          toast.success("Signed in successfully");
 
          try {
