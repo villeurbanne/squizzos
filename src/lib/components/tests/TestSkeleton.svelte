@@ -8,7 +8,6 @@
 
 <Card.Root class="w-[{width}%] bg-opacity-20">
    <Card.Header class="flex flex-col items-center justify-center gap-4 mb-2">
-      <Skeleton class="size-[250px] bg-black bg-opacity-40" />
       <Skeleton class="h-[20px] w-[100px] rounded-full bg-black bg-opacity-40" />
    </Card.Header>
    <Card.Content class="flex items-center justify-center -mt-6">
