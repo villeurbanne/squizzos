@@ -32,7 +32,7 @@
             <Table.Body>
                 {#each leaderboard.items as user, i (i)}
                     <Table.Row>
-                        <Table.Cell>{i}</Table.Cell>
+                        <Table.Cell>{i + 1}</Table.Cell>
                         <Table.Cell>{user.username}</Table.Cell>
                         <Table.Cell class="text-right">{user.score}</Table.Cell>
                     </Table.Row>
