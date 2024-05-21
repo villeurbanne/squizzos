@@ -61,7 +61,7 @@
 
 <style>
     .cooking {
-        background-image: url("https://r4.wallpaperflare.com/wallpaper/345/429/318/olympic-games-hd-usain-bolt-wallpaper-39e0786d719a8dfbd657389fa0e1c62d.jpg");
+        background-image: url("https://r4.wallpaperflare.com/wallpaper/1007/683/727/london-olympic-venues-night-view-wallpaper-190098cd517a3deb169798df60f1b69d.jpg");
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
