@@ -7,6 +7,11 @@
     import { goto } from "$app/navigation";
     const pb = new PocketBase("https://squizzos.pockethost.io");
 
+    const userRaw: string | null = localStorage.getItem("pocketbase_auth");
+    let user: any;
+    if (!userRaw) goto("/");
+    else user = JSON.parse(userRaw);
+
     let id: string;
     let currentQuestionIndex = 0;
     let test: any;
@@ -22,7 +27,16 @@
         maxScore = test.questions.length;
     });
 
-    function saveTest() {}
+    function completeTest() {
+        finished = true;
+        let data = {
+            test: test.id,
+            score,
+            user: user.model.id,
+        };
+        console.log(data);
+        pb.collection("completed").create(data);
+    }
 
     function handleAnswer(event: any) {
         if (
@@ -30,7 +44,7 @@
         )
             score++;
         currentQuestionIndex++;
-        if (currentQuestionIndex === test.questions.length) finished = true;
+        if (currentQuestionIndex === test.questions.length) completeTest();
     }
 </script>
 
@@ -40,6 +54,9 @@
     {/if}
     {#if test && !finished}
         <div class="text-white text-4xl pb-6">{test.title}</div>
+        <div class="text-white text-2xl pb-6 text-center">
+            Question {currentQuestionIndex}/{maxScore}
+        </div>
         <Question
             question={test.questions[currentQuestionIndex]}
             on:submit={handleAnswer}
@@ -48,7 +65,7 @@
     {#if finished}
         <div class="text-white text-4xl">Test completed</div>
         <div class="w-[100%] h-[100%] bg-opacity-20">
-            <div class="flex flex-row justify-center items-center p-5">
+            <div class="flex flex-col justify-center items-center p-10">
                 <div class="text-white text-2xl">
                     Score: {score}/{maxScore}
                 </div>
@@ -56,7 +73,7 @@
                     <Button
                         class="bg-white text-black p-2 rounded-md"
                         on:click={() => goto("/tests")}
-                        style="outline"
+                        variant="outline"
                     >
                         Go back
                     </Button>

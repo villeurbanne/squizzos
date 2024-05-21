@@ -95,8 +95,8 @@
             </div>
         </Button>
         <Button
-            variant={active == "/bookmarks" ? "secondary" : "ghost"}
-            href="/bookmarks"
+            variant={active == "/completed" ? "secondary" : "ghost"}
+            href="/completed"
             class={collapsed ? "" : "justify-start w-full"}
         >
             <div class="flex items-center gap-2">
