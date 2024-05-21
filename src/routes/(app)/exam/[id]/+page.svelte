@@ -15,6 +15,8 @@
         Facebook,
         X,
     } from "svelte-share-buttons-component";
+    import Fire from "$lib/components/fire/Fire.svelte";
+    import DatePicker from "$lib/components/ui/date-picker/datePicker.svelte";
     const pb = new PocketBase("https://squizzos.pockethost.io");
 
     const userRaw: string | null = localStorage.getItem("pocketbase_auth");
@@ -98,6 +100,12 @@
             question={test.questions[currentQuestionIndex]}
             on:submit={handleAnswer}
         />
+        <div class="text-white text-2xl pb-6 text-center mb-10">
+            Score: {score} / {maxScore}
+        </div>
+        <div class="flex flex-row justify-center items-center gap-5 p-20">
+            <Fire size={(score + 1) * 10}/>
+        </div>
     {/if}
     {#if finished}
         <div class="text-white text-4xl">Test completed: {test.title}</div>
