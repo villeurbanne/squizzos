@@ -61,7 +61,7 @@
    </Card.Header>
 
    <Card.Content class="flex justify-center">
-      <img src="image/lezard.png" class="w-[20%] rounded-3xl" alt="" />
+      <img src="image/lezard.png" class="w-[200px] rounded-3xl" alt="" />
    </Card.Content>
 
    <Card.Footer class="flex justify-center">
