@@ -36,6 +36,9 @@
         };
         console.log(data);
         pb.collection("completed").create(data);
+        pb.collection("users").update(user.model.id, {
+            score: user.model.score + score,
+        });
     }
 
     function handleAnswer(event: any) {
