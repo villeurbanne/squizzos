@@ -5,6 +5,15 @@
     import Question from "$lib/components/questions/Question.svelte";
     import { Button } from "$lib/components/ui/button";
     import { goto } from "$app/navigation";
+    import {
+        Reddit,
+        LinkedIn,
+        Telegram,
+        Tumblr,
+        WhatsApp,
+        Facebook,
+        X,
+    } from "svelte-share-buttons-component";
     const pb = new PocketBase("https://squizzos.pockethost.io");
 
     const userRaw: string | null = localStorage.getItem("pocketbase_auth");
@@ -19,6 +28,9 @@
     let finished = false;
     let maxScore = 0;
 
+    const url = "https://squizzos.netlify.app";
+    const title = "I just scored 5/5 on this test! Can you beat me?";
+
     onMount(async () => {
         id = $page.params.id;
         test = await pb
@@ -27,7 +39,16 @@
         maxScore = test.questions.length;
     });
 
-    function completeTest() {
+    async function findExistingCompleted() {
+        let completed = await pb.collection("completed").getList(1, 10, {
+            filter:
+                'test = "' + test.id + '" && user.id = "' + user.model.id + '"',
+        });
+        if (completed.items.length > 0) return completed.items[0];
+        else return null;
+    }
+
+    async function completeTest() {
         finished = true;
         let data = {
             test: test.id,
@@ -35,10 +56,18 @@
             user: user.model.id,
         };
         console.log(data);
-        pb.collection("completed").create(data);
-        pb.collection("users").update(user.model.id, {
-            score: user.model.score + score,
-        });
+        let existing = await findExistingCompleted();
+        if (existing) {
+            pb.collection("completed").update(existing.id, data);
+            pb.collection("users").update(user.model.id, {
+                score: user.model.score + score,
+            });
+        } else {
+            pb.collection("completed").create(data);
+            pb.collection("users").update(user.model.id, {
+                score: user.model.score + score,
+            });
+        }
     }
 
     function handleAnswer(event: any) {
@@ -66,19 +95,39 @@
         />
     {/if}
     {#if finished}
-        <div class="text-white text-4xl">Test completed</div>
+        <div class="text-white text-4xl">Test completed: {test.title}</div>
         <div class="w-[100%] h-[100%] bg-opacity-20">
-            <div class="flex flex-col justify-center items-center p-10">
+            <div class="flex flex-col justify-center items-center p-10 gap-5">
                 <div class="text-white text-2xl">
                     Score: {score}/{maxScore}
                 </div>
+                <div class="text-white text-xl">
+                    Share your score with your friends:
+                </div>
+                <div class="flex gap-2">
+                    <Reddit class="share-button" {title} {url} />
+                    <LinkedIn class="share-button" {url} />
+                    <Tumblr
+                        class="share-button"
+                        {title}
+                        {url}
+                        caption={title}
+                    />
+                    <Telegram class="share-button" text={title} {url} />
+                    <WhatsApp class="share-button" text="{title} {url}" />
+                    <Facebook class="share-button" quote={title} {url} />
+                    <X
+                        class="share-button"
+                        text={title}
+                        {url}
+                        hashtags="github,svelte"
+                        via="username"
+                        related="other,users"
+                    />
+                </div>
                 <div>
-                    <Button
-                        class="bg-white text-black p-2 rounded-md"
-                        on:click={() => goto("/tests")}
-                        variant="outline"
-                    >
-                        Go back
+                    <Button on:click={() => goto("/tests")} variant="outline">
+                        Go back to tests
                     </Button>
                 </div>
             </div>

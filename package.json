@@ -34,6 +34,7 @@
     "mode-watcher": "^0.3.0",
     "paneforge": "^0.0.2",
     "pocketbase": "^0.21.1",
+    "svelte-share-buttons-component": "^3.0.0",
     "svelte-sonner": "^0.3.19",
     "sveltepocket": "^0.1.2",
     "tailwind-merge": "^2.2.2",
