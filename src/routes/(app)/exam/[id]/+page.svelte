@@ -5,6 +5,7 @@
     import Question from "$lib/components/questions/Question.svelte";
     import { Button } from "$lib/components/ui/button";
     import { goto } from "$app/navigation";
+    import { toast } from "svelte-sonner";
     import {
         Reddit,
         LinkedIn,
@@ -73,8 +74,12 @@
     function handleAnswer(event: any) {
         if (
             event.detail.answer === test.questions[currentQuestionIndex].correct
-        )
+        ) {
+            toast.success("Correct!");
             score++;
+        } else {
+            toast.error("Incorrect!");
+        }
         currentQuestionIndex++;
         if (currentQuestionIndex === test.questions.length) completeTest();
     }
