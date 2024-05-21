@@ -16,7 +16,6 @@
         X,
     } from "svelte-share-buttons-component";
     import Fire from "$lib/components/fire/Fire.svelte";
-    import DatePicker from "$lib/components/ui/date-picker/datePicker.svelte";
     const pb = new PocketBase("https://squizzos.pockethost.io");
 
     const userRaw: string | null = localStorage.getItem("pocketbase_auth");
@@ -92,7 +91,14 @@
         <div>Loading...</div>
     {/if}
     {#if test && !finished}
-        <div class="text-white text-4xl pb-6">{test.title}</div>
+        <div class="flex flex-row justify-between p-5">
+            <div class="flex flex-row gap-2 place-items-center">
+                <h1 class="text-3xl">{test.title}</h1>
+            </div>
+            <Button on:click={() => goto("/tests")} variant="outline">
+                Go back to tests
+            </Button>
+        </div>
         <div class="text-white text-2xl pb-6 text-center">
             Question {currentQuestionIndex}/{maxScore}
         </div>
@@ -104,7 +110,7 @@
             Score: {score} / {maxScore}
         </div>
         <div class="flex flex-row justify-center items-center gap-5 p-20">
-            <Fire size={(score + 1) * 10}/>
+            <Fire size={(score + 1) * 10} />
         </div>
     {/if}
     {#if finished}

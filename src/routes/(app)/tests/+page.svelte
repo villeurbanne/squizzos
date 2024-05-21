@@ -3,7 +3,6 @@
     import Icon from "@iconify/svelte";
     import Test from "$lib/components/tests/Test.svelte";
     import { ScrollArea } from "$lib/components/ui/scroll-area/index.js";
-    import AddFoodDialog from "$lib/components/cards/addFood.dialog.svelte";
     import TestSkeleton from "$lib/components/tests/TestSkeleton.svelte";
 
     const array = Array(12)
@@ -16,7 +15,6 @@
         <Icon icon="lucide:list" class="size-9" />
         <h1 class="text-3xl">Tests</h1>
     </div>
-    <AddFoodDialog />
 </div>
 
 <div class="p-10">
