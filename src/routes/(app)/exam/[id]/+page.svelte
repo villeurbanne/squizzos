@@ -72,6 +72,7 @@
         console.log(data);
         let existing = await findExistingCompleted();
         let newScore = await calculateScoreSum();
+        newScore = newScore + score;
 
         if (existing) {
             pb.collection("completed").update(existing.id, data);
