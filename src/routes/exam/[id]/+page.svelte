@@ -17,6 +17,7 @@
         X,
     } from "svelte-share-buttons-component";
     import Fire from "$lib/components/fire/Fire.svelte";
+    import Icon from "@iconify/svelte";
     const pb = new PocketBase("https://squizzos.pockethost.io");
     const MAX_TESTS = 50;
 
@@ -112,7 +113,8 @@
                 <h1 class="text-3xl">{test.title}</h1>
             </div>
             <Button on:click={() => goto("/tests")} variant="outline">
-                Go back to tests
+                <Icon icon="ep:back" class="size-6" />
+                <div class="text-lg">Go back to tests</div>
             </Button>
         </div>
         <div class="text-white text-2xl pb-6 text-center">
@@ -166,7 +168,8 @@
                 </div>
                 <div>
                     <Button on:click={() => goto("/tests")} variant="outline">
-                        Go back to tests
+                        <Icon icon="ep:back" class="size-6" />
+                        <div class="text-lg">Go back to tests</div>
                     </Button>
                 </div>
             </div>
