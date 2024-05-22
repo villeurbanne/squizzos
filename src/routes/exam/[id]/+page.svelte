@@ -6,6 +6,7 @@
     import { Button } from "$lib/components/ui/button";
     import { goto } from "$app/navigation";
     import { toast } from "svelte-sonner";
+    import { Badge } from "$lib/components/ui/badge";
     import {
         Reddit,
         LinkedIn,
@@ -121,8 +122,12 @@
             question={test.questions[currentQuestionIndex]}
             on:submit={handleAnswer}
         />
-        <div class="text-white text-2xl pb-6 text-center mb-10">
-            Score: {score} / {maxScore}
+        <div class="text-white text-2xl pb-6 text-center mb-10 mt-10">
+            <Badge variant="secondary">
+                <div class="text-2xl">
+                    Score: {score} / {maxScore}
+                </div>
+            </Badge>
         </div>
         <div class="flex flex-row justify-center items-center gap-5 p-20">
             <Fire size={(score + 1) * 10} />
