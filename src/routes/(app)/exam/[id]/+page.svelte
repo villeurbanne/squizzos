@@ -17,6 +17,7 @@
     } from "svelte-share-buttons-component";
     import Fire from "$lib/components/fire/Fire.svelte";
     const pb = new PocketBase("https://squizzos.pockethost.io");
+    const MAX_TESTS = 50;
 
     const userRaw: string | null = localStorage.getItem("pocketbase_auth");
     let user: any;
@@ -50,6 +51,17 @@
         else return null;
     }
 
+    async function calculateScoreSum() {
+        let completed = await pb.collection("completed").getList(1, MAX_TESTS, {
+            filter: 'user.id = "' + user.model.id + '"',
+        });
+        let sum = 0;
+        completed.items.forEach((item: any) => {
+            sum += item.score;
+        });
+        return sum;
+    }
+
     async function completeTest() {
         finished = true;
         let data = {
@@ -59,15 +71,17 @@
         };
         console.log(data);
         let existing = await findExistingCompleted();
+        let newScore = await calculateScoreSum();
+
         if (existing) {
             pb.collection("completed").update(existing.id, data);
             pb.collection("users").update(user.model.id, {
-                score: user.model.score + score,
+                score: newScore,
             });
         } else {
             pb.collection("completed").create(data);
             pb.collection("users").update(user.model.id, {
-                score: user.model.score + score,
+                score: newScore,
             });
         }
     }
