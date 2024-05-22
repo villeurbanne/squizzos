@@ -21,7 +21,7 @@
     {/if}
     {#if leaderboard}
         <Table.Root>
-            <Table.Caption>Leaderboard of top Squizzos players.</Table.Caption>
+            <Table.Caption>Leaderboard of top 50 Squizzos players.</Table.Caption>
             <Table.Header>
                 <Table.Row>
                     <Table.Head class="w-[100px]">Rank</Table.Head>
