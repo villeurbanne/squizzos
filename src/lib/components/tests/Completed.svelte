@@ -37,14 +37,19 @@
             </p>
         </Card.Content>
         <Card.Footer class="flex items-center justify-center">
-            <Button
-                class="flex items-center justify-center gap-2 bg-opacity-30 hover:bg-opacity-85"
-                variant="outline"
-                on:click={restartTest}
-            >
-                <Icon icon="mdi:restart" class="size-5" />
-                <span class="text-lg text-center">Retake</span>
-            </Button>
+            {#if completed.score != test.questions.length}
+                <Button
+                    class="flex items-center justify-center gap-2 bg-opacity-30 hover:bg-opacity-85"
+                    variant="outline"
+                    on:click={restartTest}
+                >
+                    <Icon icon="mdi:restart" class="size-5" />
+                    <span class="text-lg text-center">Retake</span>
+                </Button>
+            {/if}
+            {#if completed.score == test.questions.length}
+                Test passed! 🎉
+            {/if}
         </Card.Footer>
     {/if}
     {#if !test}
